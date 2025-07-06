@@ -10,7 +10,7 @@ body {
     max-width: 1500px;
     margin: 20px auto;
     padding: 20px;
-    background:  linear-gradient(to right,#e3bbf5, #f7a2ca);
+    background:  linear-gradient(to right,#d5fdfb, #fac6de);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 }
