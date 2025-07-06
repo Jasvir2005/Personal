@@ -103,12 +103,12 @@ footer {
     padding: 20px;
     margin-top: 40px;
     height: 60px;
-    background: linear-gradient(to top, #434343, #000000,);
+    background: linear-gradient(to right, #434343, #000000,);
     color: #fff;
     border-radius: 0 0 10px 10px;
 }
 footer a {
-    color: #49c9e9;
+    color: #94b2f3;
     text-decoration: none;
 }
 footer a:hover {
