@@ -1,0 +1,118 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Topic UI</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #4db6ac, #3f51b5);
+      color: #fff;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+    }
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .search-box {
+      background: #fff;
+      border-radius: 50px;
+      padding: 10px;
+      width: 70%;
+      margin: 20px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .search-box input {
+      border: none;
+      width: 80%;
+      padding: 12px;
+      border-radius: 50px;
+      outline: none;
+      font-size: 16px;
+    }
+    .search-box button {
+      background: #4db6ac;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 50px;
+      color: #fff;
+      cursor: pointer;
+    }
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 60px;
+    }
+    .card {
+      background: #fff;
+      color: #333;
+      border-radius: 20px;
+      padding: 25px;
+      width: 300px;
+    }
+    .badge {
+      background: #4db6ac;
+      color: #fff;
+      border-radius: 12px;
+      padding: 4px 10px;
+      font-size: 12px;
+      float: right;
+    }
+    .learn-btn {
+      background: #4db6ac;
+      padding: 10px 20px;
+      border-radius: 25px;
+      color: #fff;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>Topic</h2>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Browse Topics</a>
+      <a href="#">How it Works</a>
+      <a href="#">FAQs</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>  <section class="hero">
+    <h1>Discover. Learn. Enjoy</h1>
+    <p>Platform for creatives around the world</p><div class="search-box">
+  <input type="text" placeholder="Design, Code, Marketing, Finance ..." />
+  <button>Search</button>
+</div>
+
+  </section>  <section class="cards">
+    <div class="card">
+      <span class="badge">14</span>
+      <h3>Web Design</h3>
+      <p>When you search for free CSS templates, you will notice TemplateMo is one of the best websites.</p>
+    </div><div class="card">
+  <span class="badge">25</span>
+  <h3>Finance</h3>
+  <p>Topic Listing Template includes homepage, listing page, detail page, and contact page.</p>
+  <a class="learn-btn" href="#">Learn More</a>
+</div>
+
+  </section>
+</body>
+</html>

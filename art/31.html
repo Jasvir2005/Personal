@@ -1,0 +1,222 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About — Neon UI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* -----------------------------------------
+       Base + Layout
+    ------------------------------------------*/
+    :root{
+      --bg:#06060a;
+      --glass:#0f1113aa;
+      --accent1:#23f6ff; /* cyan */
+      --accent2:#8b4bff; /* purple */
+      --accent3:#ff66c4; /* pink */
+      --muted:#98a0a8;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: 'Montserrat', system-ui, sans-serif;
+      background: radial-gradient(ellipse at center, rgba(14,16,18,1) 0%, rgba(6,6,10,1) 40%), var(--bg);
+      color:#d9e6ea;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-y:auto;
+    }
+    .wrap{
+      max-width:1200px;
+      margin:40px auto;
+      padding:40px;
+      position:relative;
+    }/* subtle grid-like background lines */
+.wrap::before{
+  content:"";
+  position:absolute;inset:0;z-index:0;
+  background-image:linear-gradient(transparent 0 calc(100% - 1px), rgba(255,255,255,0.01) 100%), linear-gradient(90deg, transparent 0 calc(100% - 1px), rgba(255,255,255,0.01) 100%);
+  background-size:120px 120px,120px 120px;
+  pointer-events:none;
+}
+
+/* header */
+header{display:flex;align-items:center;gap:24px;margin-bottom:24px;position:relative;z-index:2}
+.title{font-size:48px;letter-spacing:6px;font-weight:900;color:var(--accent1);text-shadow:0 6px 18px rgba(35,246,255,0.08), 0 0 28px rgba(35,246,255,0.12);}
+.title small{display:block;font-size:14px;opacity:0.7;margin-top:6px}
+.underline{
+  height:6px;width:160px;border-radius:999px;background:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3));
+  box-shadow:0 6px 28px rgba(138,75,255,0.12);
+  animation: slideGlow 3s infinite ease-in-out;
+}
+
+@keyframes slideGlow{
+  0%{filter:blur(6px);opacity:.85;transform:translateX(-18px)}
+  50%{filter:blur(2px);opacity:1;transform:translateX(0)}
+  100%{filter:blur(6px);opacity:.85;transform:translateX(18px)}
+}
+
+/* layout two columns */
+.grid{
+  display:grid;grid-template-columns:320px 1fr;gap:36px;align-items:start;position:relative;z-index:2
+}
+
+/* left profile card */
+.profile-card{
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:20px;padding:28px;min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;
+  box-shadow:0 10px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.03);
+  overflow:hidden;
+}
+
+/* animated neon frame */
+.neon-frame{
+  width:240px;height:240px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:72px;color:var(--accent1);
+  position:relative;border:4px solid transparent;
+  background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+  box-shadow: 0 8px 40px rgba(35,246,255,0.06), 0 0 40px rgba(139,75,255,0.06);
+  animation: floatUp 6s ease-in-out infinite, borderShift 4s linear infinite;
+  isolation:isolate;
+}
+.neon-frame::before{
+  content:"";position:absolute;inset:0;border-radius:14px;padding:4px;z-index:-1;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3));
+  mask:linear-gradient(#000,#000) content-box, linear-gradient(#000,#000);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  filter:blur(10px);opacity:.9;
+}
+
+@keyframes floatUp{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+  100%{transform:translateY(0)}
+}
+@keyframes borderShift{
+  0%{box-shadow:0 0 24px rgba(35,246,255,0.06)}
+  50%{box-shadow:0 0 40px rgba(139,75,255,0.08)}
+  100%{box-shadow:0 0 24px rgba(35,246,255,0.06)}
+}
+
+/* content column */
+.content{padding:6px 0}
+h2{
+  margin:0;font-size:26px;color:transparent;background:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3));-webkit-background-clip:text;background-clip:text;letter-spacing:2px;font-weight:800;text-transform:uppercase;
+  text-shadow:0 8px 26px rgba(139,75,255,0.04);
+  animation: popIn 0.8s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes popIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+p.lead{color:var(--muted);line-height:1.6;margin-top:16px;font-size:15px}
+
+/* stats */
+.stats{display:flex;gap:18px;margin-top:28px}
+.stat{background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));padding:18px;border-radius:12px;min-width:110px;text-align:center;border:1px solid rgba(255,255,255,0.03);
+  box-shadow:0 8px 30px rgba(2,6,10,0.6);transform:translateY(18px);opacity:0;animation: statIn .7s forwards;}
+.stat:nth-child(1){animation-delay:.2s}
+.stat:nth-child(2){animation-delay:.4s}
+.stat:nth-child(3){animation-delay:.6s}
+.stat h3{margin:0;font-size:26px;color:var(--accent1);letter-spacing:1px}
+.stat small{display:block;color:var(--muted);margin-top:6px}
+
+@keyframes statIn{to{transform:none;opacity:1}}
+
+/* tiny animated constellation dots */
+.particles{position:absolute;inset:0;z-index:0;pointer-events:none}
+.dot{position:absolute;width:6px;height:6px;border-radius:50%;background:linear-gradient(180deg,var(--accent1),var(--accent2));box-shadow:0 4px 16px rgba(35,246,255,0.06);opacity:.9;animation: drift 8s linear infinite}
+@keyframes drift{0%{transform:translateY(0) translateX(0) scale(1);opacity:.9}50%{transform:translateY(-40px) translateX(18px) scale(.9);opacity:.6}100%{transform:translateY(0) translateX(0) scale(1);opacity:.9}}
+
+/* small neon flicker effect on the big title */
+.flicker{animation:neonFlick 3s infinite}
+@keyframes neonFlick{0%{opacity:1;filter:drop-shadow(0 0 12px rgba(35,246,255,0.9))}5%{opacity:.6;filter:none}8%{opacity:1}20%{opacity:.95}100%{opacity:1}}
+
+/* responsive */
+@media (max-width:880px){
+  .grid{grid-template-columns:1fr;}
+  .neon-frame{width:200px;height:200px;font-size:54px}
+  .title{font-size:36px}
+  .wrap{padding:22px}
+  .stats{justify-content:space-between}
+}
+
+/* utility */
+.muted{color:var(--muted)}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <div class="title flicker">ABOUT ME</div>
+        <small class="muted">Crafting digital experiences</small>
+      </div>
+      <div style="flex:1;display:flex;align-items:center;justify-content:flex-start;gap:12px">
+        <div class="underline"></div>
+      </div>
+    </header><main class="grid">
+  <section class="profile-card">
+    <div class="neon-frame" aria-hidden="true">AI</div>
+    <div style="margin-top:18px;text-align:center;">
+      <div style="font-weight:700;letter-spacing:1px;margin-bottom:6px">Neural UI Designer</div>
+      <div class="muted" style="font-size:13px">Frontend · WebGL · Animations</div>
+    </div>
+  </section>
+
+  <section class="content">
+    <h2>Crafting digital experiences</h2>
+    <p class="lead">I'm a passionate web developer specializing in creating cutting-edge digital experiences that merge art with technology. My work focuses on building neural network–inspired interfaces that push the boundaries of web design.
+    </p>
+
+    <p class="lead">With over <strong>5+ years</strong> of experience in frontend development, I've mastered transforming complex ideas into intuitive, visually stunning web applications. My expertise spans responsive design to advanced animations and WebGL integrations.</p>
+
+    <div class="stats" aria-hidden="true">
+      <div class="stat">
+        <h3>50+</h3>
+        <small>projects</small>
+      </div>
+      <div class="stat">
+        <h3>5+</h3>
+        <small>years exp</small>
+      </div>
+      <div class="stat">
+        <h3>30+</h3>
+        <small>clients</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- decorative particle layer -->
+  <div class="particles" id="particles" aria-hidden="true"></div>
+</main>
+
+  </div>  <script>
+    // generate subtle constellation dots and connecting lines
+    const particlesEl = document.getElementById('particles');
+    const count = 18;
+    for(let i=0;i<count;i++){
+      const d = document.createElement('div');
+      d.className='dot';
+      // random placement across the wrap
+      const x = Math.random()*100;
+      const y = Math.random()*100;
+      const s = 4 + Math.random()*6;
+      d.style.left = x + '%';
+      d.style.top = y + '%';
+      d.style.width = s+'px';
+      d.style.height = s+'px';
+      d.style.animationDuration = (6 + Math.random()*8)+'s';
+      d.style.opacity = 0.6 + Math.random()*0.4;
+      particlesEl.appendChild(d);
+    }
+
+    // small accessibility: reduce motion respect
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(prefersReduced){
+      document.querySelectorAll('*').forEach(el=>el.style.animation='none');
+    }
+  </script></body>
+</html

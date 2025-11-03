@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nexus Flow — UI Prototype</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-1: #080711;
+      --bg-2: #0b0f1a;
+      --neon-cyan: #00f6ff;
+      --neon-magenta: #bd00ff;
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.03);
+      --muted: rgba(255,255,255,0.65);
+      --accent: linear-gradient(90deg,var(--neon-cyan),var(--neon-magenta));
+      --card-border: rgba(255,255,255,0.06);
+      --glass-border: rgba(255,255,255,0.06);
+      --glass-highlight: rgba(255,255,255,0.02);
+      --shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+
+    * { box-sizing: border-box; }
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(11,12,30,0.6), transparent),
+                  linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      color:#e9faff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-y:auto;
+    }
+
+    /* subtle particle-like dots using pseudo element */
+    body::before{
+      content:"";
+      position:fixed; inset:0; z-index:0;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(0,246,255,0.06) 0 1px, transparent 1px),
+        radial-gradient(circle at 80% 40%, rgba(189,0,255,0.05) 0 1px, transparent 1px);
+      background-size: 100px 100px, 140px 140px;
+      pointer-events:none;
+      mix-blend-mode:screen;
+      opacity:0.9;
+      filter: blur(6px);
+    }
+
+    /* COMMON LAYOUT */
+    .wrap{
+      max-width:1200px;
+      margin: 0 auto;
+      padding: 28px 20px;
+      position:relative;
+      z-index:2;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      padding:8px 0;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      text-decoration:none;
+      color:inherit;
+    }
+    .logo-mark{
+      width:44px;height:44px;border-radius:10px;
+      background: linear-gradient(135deg,var(--neon-cyan),var(--neon-magenta));
+      box-shadow: 0 6px 18px rgba(189,0,255,0.18), inset 0 -4px 10px rgba(0,0,0,0.35);
+      display:flex;align-items:center;justify-content:center;
+      font-family:Orbitron, sans-serif;font-weight:700;color:#081;
+      transform:skewX(-6deg);
+    }
+    .brand h1{margin:0;font-family:Orbitron, sans-serif;font-weight:700;letter-spacing:1px;}
+    nav{display:flex;gap:18px;align-items:center;font-size:14px}
+    nav a{color:var(--muted);text-decoration:none;padding:6px 8px;border-radius:6px}
+    nav a:hover{color:white;background:linear-gradient(90deg,rgba(255,255,255,0.03),transparent);}
+
+    .cta{
+      padding:10px 16px;
+      background:var(--accent);
+      border-radius:10px;
+      color: #06121a;
+      font-weight:600;
+      box-shadow: 0 8px 26px rgba(189,0,255,0.12);
+      border:none;
+      cursor:pointer;
+      transition:transform .18s ease, box-shadow .18s;
+    }
+    .cta:hover{ transform:translateY(-3px); box-shadow: 0 20px 50px rgba(0,246,255,0.08); }
+
+    /* HERO */
+    .hero{
+      min-height:56vh;
+      display:flex;
+      align-items:center;
+      gap:28px;
+      padding:50px 0 28px;
+      position:relative;
+      overflow:visible;
+    }
+
+    .hero-left{
+      flex:1;
+      z-index:3;
+      padding-right:20px;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      font-size:13px;
+      color:var(--neon-cyan);
+      font-weight:600;
+      letter-spacing:1.5px;
+      margin-bottom:10px;
+    }
+
+    .hero h2{
+      margin:6px 0 14px;
+      font-size:44px;
+      line-height:1.02;
+      letter-spacing:2px;
+      font-family:Orbitron, sans-serif;
+      background: -webkit-linear-gradient(90deg,var(--neon-cyan),var(--neon-magenta));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p.lead{
+      margin:0 0 18px;
+      max-width:640px;
+      color:rgba(255,255,255,0.75);
+      font-size:15px;
+    }
+
+    .hero .btns{display:flex;gap:14px;align-items:center;}
+    .btn {
+      padding:12px 18px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      color:var(--neon-cyan);
+      font-weight:600;
+      cursor:pointer;
+      transition:transform .18s, box-shadow .18s;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+    }
+    .btn.ghost{ color:var(--muted); border:1px solid rgba(255,255,255,0.03); }
+    .btn:hover{ transform:translateY(-4px); }
+
+    /* Stats */
+    .stats{
+      margin-top:28px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+      align-items:center;
+    }
+    .stat{
+      padding:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+      border-radius:12px;
+      text-align:center;
+      border:1px solid var(--card-border);
+      box-shadow:var(--shadow);
+    }
+    .stat .num{font-family:Orbitron, sans-serif;font-size:22px;letter-spacing:1px;color:var(--neon-cyan);}
+    .stat .label{font-size:12px;color:var(--muted);margin-top:6px}
+
+    /* CORE SYSTEMS */
+    .section{
+      margin-top:40px;
+      padding:36px 0;
+    }
+    .section h3{
+      text-align:center;
+      font-family:Orbitron, sans-serif;
+      letter-spacing:3px;
+      color:transparent;
+      background: -webkit-linear-gradient(90deg,var(--neon-cyan),var(--neon-magenta));
+      -webkit-background-clip: text;
+      font-size:22px;margin:0 0 8px;
+    }
+    .section p.sub{ text-align:center;color:var(--muted); margin:0 0 28px;}
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-top:18px;
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;
+      padding:22px;
+      min-height:160px;
+      border:1px solid var(--glass-border);
+      position:relative;
+      overflow:hidden;
+      transition:transform .22s, box-shadow .22s;
+      box-shadow: 0 8px 30px rgba(2,6,18,0.6);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .card:hover{ transform:translateY(-10px); box-shadow: 0 24px 60px rgba(0,0,0,0.7); }
+
+    .icon{
+      width:64px;height:64px;border-radius:12px;
+      display:flex;align-items:center;justify-content:center;
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.03);
+      font-size:22px;
+      color:var(--neon-cyan);
+      box-shadow:0 8px 30px rgba(0,0,0,0.5), inset 0 -6px 16px rgba(0,0,0,0.45);
+    }
+
+    .card h4{margin:0;font-family:Orbitron, sans-serif;font-size:15px;color:var(--neon-cyan);}
+    .card p{margin:0;color:var(--muted);font-size:13px;line-height:1.35}
+
+    /* pricing */
+    .pricing{
+      margin-top:36px;
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .price{
+      padding:22px;border-radius:12px;border:1px solid var(--card-border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .price.popular{
+      transform:scale(1.03);
+      border: 1px solid rgba(189,0,255,0.18);
+      box-shadow: 0 30px 80px rgba(189,0,255,0.06);
+    }
+    .price .tag{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:Orbitron;font-size:12px;padding:6px 12px;border-radius:6px;background:linear-gradient(90deg,var(--neon-cyan),var(--neon-magenta));color:#06121a}
+    .price h5{margin:36px 0 6px;font-family:Orbitron;font-size:20px;color:var(--neon-cyan)}
+    .price .amount{font-size:34px;font-family:Orbitron;margin:4px 0 14px}
+    .price ul{list-style:none;padding:0;margin:0 0 18px;color:var(--muted);text-align:left}
+    .price ul li{padding:8px 0;border-top:1px dashed rgba(255,255,255,0.02)}
+    .price .buy{display:inline-block;padding:10px 18px;border-radius:10px;background:var(--accent);color:#06121a;font-weight:700;text-decoration:none}
+
+    /* contact form */
+    .contact{
+      margin-top:36px;display:flex;gap:18px;
+      align-items:flex-start;
+    }
+    .contact .form{
+      flex:1;
+      padding:22px;border-radius:12px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+      border:1px solid var(--card-border);
+    }
+    label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
+    input[type="text"], input[type="email"], textarea{
+      width:100%; padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);
+      background:transparent;color:#e9faff;font-size:14px;outline:none;
+    }
+    textarea{min-height:120px;resize:vertical}
+    .form .send{margin-top:12px;padding:10px 16px;border-radius:10px;background:var(--accent);border:none;font-weight:700;color:#06121a;cursor:pointer}
+
+    /* footer */
+    footer{
+      margin-top:44px;padding:28px 0;color:var(--muted);font-size:13px;text-align:center;
+      border-top:1px solid rgba(255,255,255,0.02);
+    }
+
+    /* responsive */
+    @media (max-width:1000px){
+      .cards{grid-template-columns:repeat(2,1fr)}
+      .pricing{grid-template-columns:repeat(2,1fr)}
+      .stats{grid-template-columns:repeat(2,1fr)}
+      .hero h2{font-size:36px}
+    }
+    @media (max-width:700px){
+      .wrap{padding:18px}
+      header{flex-direction:column;align-items:flex-start;gap:12px}
+      .hero{flex-direction:column;min-height:48vh;padding-top:20px}
+      .cards{grid-template-columns:1fr}
+      .pricing{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr}
+      .contact{flex-direction:column}
+      .brand h1{font-size:18px}
+      .logo-mark{width:42px;height:42px}
+    }
+
+    /* tiny sparkle animation on hero */
+    @keyframes scan {
+      0% { transform:translateY(-30px); opacity:0 }
+      40% { opacity:0.3 }
+      100% { transform:translateY(0); opacity:1 }
+    }
+
+    /* small accent animated lines */
+    .accent-line{
+      position:absolute;height:2px;background:linear-gradient(90deg,var(--neon-cyan),transparent);
+      left:0;right:0;top:0;opacity:0.22;transform:skewX(-12deg);
+      filter:blur(4px);
+    }
+
+    /* subtle moving background stripes */
+    .bg-stripes{
+      position:absolute; inset:0; z-index:1;pointer-events:none;
+      background-image: linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 120px 120px;
+      mix-blend-mode:screen;opacity:0.05;
+      animation: shift 24s linear infinite;
+    }
+    @keyframes shift { from { background-position:0 0 } to { background-position:1200px 0 } }
+
+  </style>
+</head>
+<body>
+
+  <div class="bg-stripes" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <!-- Header -->
+    <header>
+      <a class="brand" href="#">
+        <div class="logo-mark">NF</div>
+        <div>
+          <h1>templatem o</h1>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px">Nexus Flow Prototype</div>
+        </div>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#stats">Stats</a>
+        <a href="#contact">Contact</a>
+        <button class="cta" aria-label="Access Terminal">ACCESS TERMINAL</button>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" role="region" aria-labelledby="hero-title">
+      <div class="hero-left">
+        <div class="eyebrow">NexusFlow</div>
+        <h2 id="hero-title">The quantum leap in team collaboration</h2>
+        <p class="lead">Connect minds, sync realities and achieve the impossible. Nexus Flow provides holo-workspaces, neural support and uncompromised security for teams that build the future.</p>
+
+        <div class="btns">
+          <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">INITIALIZE SYSTEM</button>
+          <button class="btn ghost">VIEW DOCUMENTATION</button>
+        </div>
+
+        <!-- stats row -->
+        <div id="stats" class="stats" style="margin-top:30px">
+          <div class="stat"><div class="num">50K+</div><div class="label">ACTIVE USERS</div></div>
+          <div class="stat"><div class="num">999.%</div><div class="label">UPTIME</div></div>
+          <div class="stat"><div class="num">500M+</div><div class="label">TASKS PROCESSED</div></div>
+          <div class="stat"><div class="num">180+</div><div class="label">COUNTRIES</div></div>
+        </div>
+      </div>
+
+      <!-- right: decorative glass panel (visual) -->
+      <div style="width:360px;min-width:260px;align-self:stretch;display:flex;flex-direction:column;gap:12px;justify-content:center;position:relative;">
+        <div style="flex:1;border-radius:14px;padding:20px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);box-shadow:0 16px 40px rgba(0,0,0,0.7)">
+          <div style="font-family:Orbitron,font-size:13px;color:var(--neon-cyan);letter-spacing:1.5px">TERMINAL</div>
+          <div style="margin-top:14px">
+            <div style="font-weight:700;font-family:Orbitron;font-size:20px;color:transparent;background: -webkit-linear-gradient(90deg,var(--neon-cyan),var(--neon-magenta));-webkit-background-clip:text">NEXUS FLOW</div>
+            <div style="color:var(--muted);font-size:13px;margin-top:8px">Neural access active — latency 1.2ms</div>
+          </div>
+
+          <div style="margin-top:18px;display:flex;gap:10px">
+            <div style="flex:1;background:rgba(255,255,255,0.01);padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)">
+              <div style="font-size:12px;color:var(--muted)">Active Links</div>
+              <div style="font-family:Orbitron;margin-top:6px">12 / 24</div>
+            </div>
+            <div style="width:90px;background:linear-gradient(135deg,var(--neon-cyan),var(--neon-magenta));padding:10px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#06121a">SYNC</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE SYSTEMS -->
+    <section id="features" class="section" aria-labelledby="core-title">
+      <h3 id="core-title">CORE SYSTEMS</h3>
+      <p class="sub">Advanced modules designed for maximum efficiency and seamless integration</p>
+
+      <div class="cards" role="list">
+        <article class="card" role="listitem" aria-labelledby="q1">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="icon" aria-hidden="true">⚡</div>
+            <div>
+              <h4 id="q1">QUANTUM PROCESSING</h4>
+              <p>Experience lightning-fast data processing with quantum-inspired algorithms that handle complex workflows in microseconds.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" role="listitem" aria-labelledby="q2">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="icon" aria-hidden="true">🧠</div>
+            <div>
+              <h4 id="q2">NEURAL NETWORKS</h4>
+              <p>AI-powered decision making that learns from your team's patterns and optimizes collaboration in real-time.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" role="listitem" aria-labelledby="q3">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="icon" aria-hidden="true">🌐</div>
+            <div>
+              <h4 id="q3">HOLOGRAPHIC INTERFACE</h4>
+              <p>Immersive 3D workspaces that transcend traditional boundaries, bringing remote teams into a shared reality.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" role="listitem" aria-labelledby="q4">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="icon" aria-hidden="true">🔒</div>
+            <div>
+              <h4 id="q4">QUANTUM ENCRYPTION</h4>
+              <p>Military-grade security protocols that make sure your neural transmissions stay private and tamper-resistant.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" role="listitem" aria-labelledby="q5">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="icon" aria-hidden="true">🚀</div>
+            <div>
+              <h4 id="q5">HYPERDRIVE SYNC</h4>
+              <p>Instantaneous synchronization across all devices and platforms with near-zero latency.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" role="listitem" aria-labelledby="q6">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="icon" aria-hidden="true">🔍</div>
+            <div>
+              <h4 id="q6">MIND READING ANALYTICS</h4>
+              <p>Predictive analytics so advanced it anticipates your team's needs before they are voiced.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ACCESS LEVELS / PRICING -->
+    <section id="pricing" class="section" aria-labelledby="pricing-title">
+      <h3 id="pricing-title">ACCESS LEVELS</h3>
+      <p class="sub">Choose your gateway to the future of collaboration</p>
+
+      <div class="pricing" role="list">
+        <div class="price" role="listitem" aria-labelledby="p1">
+          <h5 id="p1">INITIATE</h5>
+          <div class="amount">$49</div>
+          <ul>
+            <li>Basic quantum processing</li>
+            <li>5 holographic workspaces</li>
+            <li>Standard encryption</li>
+            <li>Community support matrix</li>
+          </ul>
+          <a class="buy" href="#contact">Get Initiate</a>
+        </div>
+
+        <div class="price popular" role="listitem" aria-labelledby="p2">
+          <div class="tag">MOST POPULAR</div>
+          <h5 id="p2">NEXUS</h5>
+          <div class="amount">$149</div>
+          <ul>
+            <li>Advanced quantum algorithms</li>
+            <li>Unlimited holo-workspaces</li>
+            <li>Quantum encryption fortress</li>
+            <li>Priority neural support</li>
+          </ul>
+          <a class="buy" href="#contact">Choose Nexus</a>
+        </div>
+
+        <div class="price" role="listitem" aria-labelledby="p3">
+          <h5 id="p3">TRANSCEND</h5>
+          <div class="amount">$399</div>
+          <ul>
+            <li>Infinite processing power</li>
+            <li>Custom reality matrices</li>
+            <li>Temporal encryption layers</li>
+            <li>Direct neural interface</li>
+          </ul>
+          <a class="buy" href="#contact">Select Transcend</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <h3 id="contact-title">INITIALIZE CONTACT</h3>
+      <p class="sub">Send a transmission through the neural network</p>
+
+      <div class="contact">
+        <form class="form" aria-label="Initialize contact form" onsubmit="event.preventDefault(); alert('Transmission queued — demo only.');">
+          <label for="neural">NEURAL ID</label>
+          <input id="neural" type="text" placeholder="Enter your designation" required>
+
+          <label for="address" style="margin-top:12px">QUANTUM ADDRESS</label>
+          <input id="address" type="email" placeholder="you.id@nexusflow.com" required>
+
+          <label for="message" style="margin-top:12px">TRANSMISSION</label>
+          <textarea id="message" placeholder="Compose your message to the network..." required></textarea>
+
+          <button class="send" type="submit">SEND TRANSMISSION</button>
+        </form>
+
+        <aside style="width:320px;min-width:240px">
+          <div style="padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));border:1px solid var(--card-border)">
+            <div style="font-weight:700;font-family:Orbitron">STATUS</div>
+            <div style="margin-top:10px;color:var(--muted)">Neural network online — nodes healthy</div>
+
+            <div style="display:flex;gap:8px;margin-top:14px">
+              <div style="flex:1;padding:10px;border-radius:8px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02)">
+                <div style="font-size:12px;color:var(--muted)">Latency</div>
+                <div style="font-family:Orbitron;margin-top:6px">1.2 ms</div>
+              </div>
+              <div style="flex:1;padding:10px;border-radius:8px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02)">
+                <div style="font-size:12px;color:var(--muted)">Uptime</div>
+                <div style="font-family:Orbitron;margin-top:6px">999.%</div>
+              </div>
+            </div>
+
+            <div style="margin-top:14px;text-align:center"><button class="btn" style="width:100%">OPEN TERMINAL</button></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <footer>
+      © 2025 NexusFlow Systems. All realities reserved. — Brought to you by TemplateMo
+    </footer>
+
+  </div>
+
+</body>
+</html>

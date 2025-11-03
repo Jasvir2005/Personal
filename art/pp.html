@@ -1,0 +1,280 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nexus Flow — Template</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0b10;
+      --panel:#0f1020;
+      --neon-a: #35F2FF; /* cyan */
+      --neon-b: #A34DFF; /* magenta */
+      --muted: rgba(255,255,255,0.08);
+      --glass: rgba(255,255,255,0.03);
+      --accent: linear-gradient(90deg,var(--neon-a),var(--neon-b));
+      --card-shadow: 0 10px 30px rgba(5,5,10,0.65);
+      --radius: 12px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: radial-gradient(1200px 400px at 10% 10%, rgba(160,70,255,0.06), transparent 6%),
+                  radial-gradient(900px 300px at 90% 80%, rgba(55,242,255,0.04), transparent 8%),
+                  var(--bg);
+      color: #dbeafe;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+      padding-bottom:80px;
+    }/* container */
+.container{max-width:1100px;margin:0 auto;padding:28px}
+
+header{
+  display:flex;align-items:center;justify-content:space-between;padding:18px 0;
+}
+.brand{font-family:'Share Tech Mono',monospace;color:var(--neon-a);font-weight:700;letter-spacing:1px}
+nav a{color:rgba(255,255,255,0.55);text-decoration:none;margin-left:18px;font-weight:600;font-size:14px}
+.cta{background:var(--accent);-webkit-background-clip:text;background-clip:text;color:transparent;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,0.06)}
+
+/* hero */
+.hero{padding:46px 0 80px;text-align:center}
+.kicker{color:rgba(255,255,255,0.28);text-transform:uppercase;letter-spacing:3px;font-weight:700;font-size:12px}
+h1{font-family:'Share Tech Mono',monospace;font-size:56px;margin:12px 0;background:var(--accent);-webkit-background-clip:text;background-clip:text;color:transparent}
+p.lead{max-width:760px;margin:16px auto;color:rgba(255,255,255,0.62)}
+.hero-buttons{display:flex;gap:12px;justify-content:center;margin-top:22px}
+.btn{padding:12px 20px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);font-weight:700;cursor:pointer}
+.btn.primary{background:linear-gradient(90deg,#3ee7ff,#c56cff);color:#071021;box-shadow:0 8px 30px rgba(99,40,170,0.18)}
+.btn.ghost{background:transparent;color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.08)}
+
+/* stats */
+.stats{display:flex;gap:18px;justify-content:center;margin-top:36px}
+.stat{min-width:120px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:10px;padding:18px;text-align:center;border:1px solid rgba(255,255,255,0.03)}
+.stat .num{font-family:'Share Tech Mono',monospace;font-size:26px;color:var(--neon-a);font-weight:700}
+.stat .label{font-size:12px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:1px;margin-top:6px}
+
+/* core systems grid */
+.section{padding:46px 0}
+.section h2{font-family:'Share Tech Mono',monospace;text-align:center;margin:0 0 6px;font-size:26px;color:var(--neon-a)}
+.section p.sub{max-width:760px;margin:8px auto 24px;color:rgba(255,255,255,0.52);text-align:center}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);box-shadow:var(--card-shadow);min-height:160px;position:relative}
+.icon{width:56px;height:56px;border-radius:12px;background:linear-gradient(180deg,var(--neon-a),var(--neon-b));display:flex;align-items:center;justify-content:center;font-size:22px;color:#071021;font-weight:800}
+.card h3{margin:10px 0 6px;font-size:16px;font-weight:700;color:#dff}
+.card p{color:rgba(255,255,255,0.58);font-size:13px;margin:0}
+
+/* pricing cards */
+.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.price-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:28px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);text-align:center}
+.price-card .price{font-family:'Share Tech Mono',monospace;font-size:42px;margin:8px 0;color:var(--neon-b)}
+.price-card .tier{font-size:13px;text-transform:uppercase;color:rgba(255,255,255,0.44);letter-spacing:1px}
+.badge{display:inline-block;padding:6px 10px;border-radius:8px;background:linear-gradient(90deg,var(--neon-a),var(--neon-b));color:#071021;font-weight:700;font-size:12px;margin-bottom:8px}
+.features{margin-top:12px;text-align:left;color:rgba(255,255,255,0.55);font-size:14px}
+.features li{margin:8px 0}
+
+/* contact */
+.contact-wrap{display:flex;gap:24px;align-items:flex-start;justify-content:center}
+.contact-card{flex:0 0 480px;padding:26px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
+.field{display:block;margin-bottom:12px}
+.field label{display:block;font-size:12px;margin-bottom:6px;color:rgba(255,255,255,0.6)}
+.field input,.field textarea{width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;font-size:14px}
+.field textarea{min-height:120px;resize:vertical}
+
+footer{margin-top:48px;padding:18px 0;color:rgba(255,255,255,0.35);text-align:center;font-size:13px}
+
+/* responsiveness */
+@media (max-width:980px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .pricing{grid-template-columns:repeat(2,1fr)}
+  h1{font-size:44px}
+  .container{padding:20px}
+}
+@media (max-width:680px){
+  .grid{grid-template-columns:1fr}
+  .pricing{grid-template-columns:1fr}
+  header{flex-direction:column;align-items:flex-start}
+  nav{margin-top:12px}
+  .stats{flex-direction:column;align-items:center}
+  .hero{padding:30px 0}
+  h1{font-size:34px}
+}
+
+/* small visual touches */
+.glow{filter:drop-shadow(0 8px 30px rgba(163,77,255,0.18))}
+.muted{color:rgba(255,255,255,0.45)}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">NexusFlow</div>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact" class="cta">Access Terminal</a>
+      </nav>
+    </header><section class="hero" id="home">
+  <div class="kicker">The quantum leap in team collaboration</div>
+  <h1>NEXUS <span style="color:var(--neon-b)">FLOW</span></h1>
+  <p class="lead">Connect minds, sync realities, achieve impossible. A neon-styled landing template showcasing modern features, core modules and pricing — built with pure HTML & CSS for quick customization.</p>
+  <div class="hero-buttons">
+    <button class="btn primary">Initialize System</button>
+    <button class="btn ghost">View Documentation</button>
+  </div>
+
+  <div class="stats" style="margin-top:36px">
+    <div class="stat">
+      <div class="num">50K+</div>
+      <div class="label">Active Users</div>
+    </div>
+    <div class="stat">
+      <div class="num">999.%</div>
+      <div class="label">Uptime</div>
+    </div>
+    <div class="stat">
+      <div class="num">500M+</div>
+      <div class="label">Tasks Processed</div>
+    </div>
+    <div class="stat">
+      <div class="num">180+</div>
+      <div class="label">Countries</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <h2>CORE SYSTEMS</h2>
+  <p class="sub">Advanced modules designed for maximum efficiency and seamless integration</p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="icon">⚡</div>
+      <h3>Quantum Processing</h3>
+      <p>Experience lightning-fast data processing with quantum-inspired algorithms that handle complex workflows in microseconds.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🤖</div>
+      <h3>Neural Networks</h3>
+      <p>AI-powered decision making that learns from your team's patterns and optimizes collaboration in real-time.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🌐</div>
+      <h3>Holographic Interface</h3>
+      <p>Immersive 3D workspace that transcends traditional boundaries, bringing remote teams into a shared reality.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🔐</div>
+      <h3>Quantum Encryption</h3>
+      <p>Military-grade security protocols with quantum encryption that makes unauthorized access infeasible.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🚀</div>
+      <h3>Hyperdrive Sync</h3>
+      <p>Instantaneous synchronization across all devices and platforms with near-zero latency.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🧠</div>
+      <h3>Mind Reading Analytics</h3>
+      <p>Predictive analytics so advanced it anticipates your team's needs before they surface.</p>
+    </div>
+
+  </div>
+
+  <h2 style="margin-top:40px">ACCESS LEVELS</h2>
+  <p class="sub">Choose your gateway to the future of collaboration</p>
+
+  <div class="pricing" id="pricing">
+    <div class="price-card">
+      <div class="tier muted">Initiate</div>
+      <div class="price">$49</div>
+      <div class="muted">per neural link</div>
+      <ul class="features">
+        <li>Basic quantum processing</li>
+        <li>5 holographic workspaces</li>
+        <li>Standard encryption</li>
+        <li>Community support matrix</li>
+      </ul>
+    </div>
+
+    <div class="price-card">
+      <div class="badge">Most Popular</div>
+      <div class="tier muted">Nexus</div>
+      <div class="price">$149</div>
+      <div class="muted">per neural link</div>
+      <ul class="features">
+        <li>Advanced quantum algorithms</li>
+        <li>Unlimited holo-workspaces</li>
+        <li>Quantum encryption fortress</li>
+        <li>Priority neural support</li>
+      </ul>
+    </div>
+
+    <div class="price-card">
+      <div class="tier muted">Transcend</div>
+      <div class="price">$399</div>
+      <div class="muted">per neural link</div>
+      <ul class="features">
+        <li>Infinite processing power</li>
+        <li>Custom reality matrices</li>
+        <li>Temporal encryption layers</li>
+        <li>Direct neural interface</li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+
+<section class="section" id="contact">
+  <h2>INITIALIZE CONTACT</h2>
+  <p class="sub">Send a transmission through the neural network</p>
+
+  <div class="contact-wrap">
+    <div class="contact-card">
+      <form>
+        <div class="field">
+          <label>Neural ID</label>
+          <input type="text" placeholder="Enter your designation">
+        </div>
+        <div class="field">
+          <label>Quantum Address</label>
+          <input type="email" placeholder="you@NexusFlow.com">
+        </div>
+        <div class="field">
+          <label>Transmission</label>
+          <textarea placeholder="Compose your message to the network..."></textarea>
+        </div>
+        <div style="text-align:right;margin-top:8px">
+          <button type="submit" class="btn primary">Send Transmission</button>
+        </div>
+      </form>
+    </div>
+
+    <div style="flex:1;min-width:280px;color:rgba(255,255,255,0.55)">
+      <h3 style="margin-top:0;font-size:20px;color:var(--neon-a)">Need help?</h3>
+      <p class="muted">Contact our support team for onboarding, custom integrations, or enterprise pricing. We respond within 24 hours.</p>
+
+      <div style="margin-top:18px;background:var(--glass);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)">
+        <div style="font-weight:700">Support</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.45)">support@nexusflow.example</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  © 2025 NexusFlow Systems. All realities reserved. • Built with ❤️ by TemplateMo-style template
+</footer>
+
+  </div>
+</body>
+</html>
