@@ -133,6 +133,93 @@
     text-align: center;
   }
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.contact-section {
+  width: 100%;
+  padding: 60px 20px;
+  background: #f4f7fb;
+  display: flex;
+  justify-content: center;
+}
+
+.contact-container {
+  max-width: 700px;
+  width: 100%;
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.contact-container h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.contact-container p {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.contact-form .input-group {
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #6a5acd;
+  outline: none;
+}
+
+.contact-btn {
+  width: 100%;
+  padding: 14px;
+  background: #6a5acd;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact-btn:hover {
+  background: #473cbb;
+}
+
+.contact-info {
+  margin-top: 25px;
+  text-align: left;
+  font-size: 15px;
+  color: #333;
+}
+.contact-btn {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
   </style>
 </head>
@@ -169,7 +256,41 @@
     </p>
   </div>
 </div>
+<div class="contact-section">
+  <div class="contact-container">
+    <h2>Contact Us</h2>
+    <p>Have questions? We’d love to hear from you.</p>
+
+    <form class="contact-form">
+      <div class="input-group">
+        <input type="text" placeholder="Your Name" required>
+      </div>
+
+      <div class="input-group">
+        <input type="email" placeholder="Email Address" required>
+      </div>
+
+      <div class="input-group">
+        <input type="text" placeholder="Subject">
+      </div>
+
+      <div class="input-group">
+        <textarea rows="5" placeholder="Message" required></textarea>
+      </div>
+
+      <button type="submit" class="contact-btn">Send Message</button>
+    </form>
+
+    <div class="contact-info">
+      <p>📍 Address: 123 Web Street, India</p>
+       <p>📞 Phone: +91 98765 43210</p>
+      <p>✉ Email: info@example.com</p>
+    </div>
+  </div>
+  </div>
+
 
   </section>
+  
 </body>
 </html>

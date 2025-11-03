@@ -111,7 +111,7 @@
     --accent-cyan: #5ff0ff;
     --accent-magenta: #b95bff;
     --accent-purple: #7e3cff;
-    --muted: rgba(253, 235, 235, 0.37);
+    --muted: rgba(245, 226, 226, 0.541);
     --glass-border: rgba(255,255,255,0.06);
     --glass-highlight: rgba(255,255,255,0.02);
     --radius: 14px;
@@ -443,7 +443,7 @@
 
 .about-content .text h6 {
   margin-bottom: 1rem;
-  color: #5ff0ff;
+  color: #c56cff;
   font-weight: bold;
   font-size: 35px;
   
@@ -452,5 +452,3 @@
 .about-content .text p {
   font-size: 18px;
 }
-
-
