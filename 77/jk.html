@@ -18,19 +18,18 @@
     <!-- Header -->
     <header>
       <a class="brand" href="#">
-        <div class="logo-mark">NF</div>
+        <div class="logo-mark">ਪੰਜਾਬ</div>
         <div>
-          <h1>templatem o</h1>
-          <div style="font-size:12px;color:var(--muted);margin-top:4px">Nexus Flow Prototype</div>
+          <h1>VERSE</h1>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px"></div>
         </div>
       </a>
 
       <nav aria-label="Main navigation">
-        <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#stats">Stats</a>
+        <a href="#about">About us</a>
+        <a href="#feature">Features</a>
+        <a href="#stats">How to Work</a>
         <a href="#contact">Contact</a>
-        <button class="cta" aria-label="Access Terminal">ACCESS TERMINAL</button>
       </nav>
     </header>
       <!-- HERO -->
@@ -47,21 +46,36 @@
     <div class="center">
       <div class="brand1">ਪੰਜਾਬ <span style="color:transparent; background:linear-gradient(90deg,var(--accent-magenta),var(--accent-cyan)); -webkit-background-clip:text;">VERSE</span></div>
     
-    <p>Platform for creatives around the world</p><div class="search-box">
-    <input type="text" placeholder="Design, Code, Marketing, Finance ..." />
-    <button>Search</button>
-            <span id="clearInputBtn" class="clear-btn">&times;</span>
+    
+    <section class="idiom-translation">
+          <form method="POST" autocomplete="off" id="searchForm">
+            <label for="punjabi-idiom">Enter the sentences :</label>
+            <div class="search-wrapper">
+              <input
+                type="text"
+                id="searchBox"
+                name="query"
+                placeholder="Enter a keyword"
+                value="{{ keyword }}"
+                required
+              />
+              <span id="clearInputBtn" class="clear-btn">&times;</span>
+              <ul id="suggestions"></ul>
+            </div>
             <input type="hidden" name="selected" id="selectedValue" value="false" />
+            <button type="submit">Search</button>
             <button type="button" onclick="clearSearch()">Clear</button>
-</div>
+          </form>
+        </section>
 
  <!-- OUTPUT-->
- <section class="contact-wrap">
-    <div class="contact-card">
+ <section class="output-wrap">
+    <div class="output-card">
+      <h4>OUTPUT:</h4>
     </div>
   </section>
 <!-- ABOUT US-->
-<section class="about">
+<section id="about" class="about">
         <div class="about-content"aria-labelledby="core-title">
             <img src="b.jpeg" alt="working">
             <div class="text">
@@ -76,59 +90,57 @@ valuable for students, researchers, translators, and language enthusiasts.</p>
     </section>
 
  <!-- ACCESS LEVELS / PRICING -->
-    <section id="pricing" class="section" aria-labelledby="pricing-title">
+    <section id="feature" class="section" aria-labelledby="pricing-title">
       <h3 id="pricing-title">ACCESS LEVELS</h3>
       <p class="sub">Choose your gateway to the future of collaboration</p>
 
       <div class="pricing" role="list">
         <div class="price" role="listitem" aria-labelledby="p1">
           <h5 id="p1">INITIATE</h5>
-          <div class="amount">$49</div>
+          
           <ul>
             <li>Basic quantum processing</li>
             <li>5 holographic workspaces</li>
             <li>Standard encryption</li>
             <li>Community support matrix</li>
           </ul>
-          <a class="buy" href="#contact">Get Initiate</a>
         </div>
 
         <div class="price popular" role="listitem" aria-labelledby="p2">
-          <div class="tag">MOST POPULAR</div>
+          
           <h5 id="p2">NEXUS</h5>
-          <div class="amount">$149</div>
+
           <ul>
             <li>Advanced quantum algorithms</li>
             <li>Unlimited holo-workspaces</li>
             <li>Quantum encryption fortress</li>
             <li>Priority neural support</li>
           </ul>
-          <a class="buy" href="#contact">Choose Nexus</a>
         </div>
 
         <div class="price" role="listitem" aria-labelledby="p3">
           <h5 id="p3">TRANSCEND</h5>
-          <div class="amount">$399</div>
+          
           <ul>
             <li>Infinite processing power</li>
             <li>Custom reality matrices</li>
             <li>Temporal encryption layers</li>
             <li>Direct neural interface</li>
           </ul>
-          <a class="buy" href="#contact">Select Transcend</a>
+         
         </div>
       </div>
     </section>
   
   <!-- CORE SYSTEMS -->
-    <section id="features" class="section" aria-labelledby="core-title">
-      <h3 id="core-title">CORE SYSTEMS</h3>
+    <section id="stats" class="section" aria-labelledby="core-title">
+      <h3 id="core-title">How our website works</h3>
       <p class="sub">Advanced modules designed for maximum efficiency and seamless integration</p>
 
       <div class="cards" role="list">
         <article class="card" role="listitem" aria-labelledby="q1">
           <div style="display:flex;gap:12px;align-items:center">
-            <div class="icon" aria-hidden="true">⚡</div>
+            <div class="icon" aria-hidden="true">1</div>
             <div>
               <h4 id="q1">QUANTUM PROCESSING</h4>
               <p>Experience lightning-fast data processing with quantum-inspired algorithms that handle complex workflows in microseconds.</p>
@@ -138,7 +150,7 @@ valuable for students, researchers, translators, and language enthusiasts.</p>
 
         <article class="card" role="listitem" aria-labelledby="q2">
           <div style="display:flex;gap:12px;align-items:center">
-            <div class="icon" aria-hidden="true">🧠</div>
+            <div class="icon" aria-hidden="true">2</div>
             <div>
               <h4 id="q2">NEURAL NETWORKS</h4>
               <p>AI-powered decision making that learns from your team's patterns and optimizes collaboration in real-time.</p>
@@ -148,7 +160,7 @@ valuable for students, researchers, translators, and language enthusiasts.</p>
 
         <article class="card" role="listitem" aria-labelledby="q3">
           <div style="display:flex;gap:12px;align-items:center">
-            <div class="icon" aria-hidden="true">🌐</div>
+            <div class="icon" aria-hidden="true">3</div>
             <div>
               <h4 id="q3">HOLOGRAPHIC INTERFACE</h4>
               <p>Immersive 3D workspaces that transcend traditional boundaries, bringing remote teams into a shared reality.</p>
@@ -158,7 +170,7 @@ valuable for students, researchers, translators, and language enthusiasts.</p>
 
         <article class="card" role="listitem" aria-labelledby="q4">
           <div style="display:flex;gap:12px;align-items:center">
-            <div class="icon" aria-hidden="true">🔒</div>
+            <div class="icon" aria-hidden="true">4</div>
             <div>
               <h4 id="q4">QUANTUM ENCRYPTION</h4>
               <p>Military-grade security protocols that make sure your neural transmissions stay private and tamper-resistant.</p>
@@ -168,7 +180,7 @@ valuable for students, researchers, translators, and language enthusiasts.</p>
 
         <article class="card" role="listitem" aria-labelledby="q5">
           <div style="display:flex;gap:12px;align-items:center">
-            <div class="icon" aria-hidden="true">🚀</div>
+            <div class="icon" aria-hidden="true">5</div>
             <div>
               <h4 id="q5">HYPERDRIVE SYNC</h4>
               <p>Instantaneous synchronization across all devices and platforms with near-zero latency.</p>
@@ -178,7 +190,7 @@ valuable for students, researchers, translators, and language enthusiasts.</p>
 
         <article class="card" role="listitem" aria-labelledby="q6">
           <div style="display:flex;gap:12px;align-items:center">
-            <div class="icon" aria-hidden="true">🔍</div>
+            <div class="icon" aria-hidden="true">6</div>
             <div>
               <h4 id="q6">MIND READING ANALYTICS</h4>
               <p>Predictive analytics so advanced it anticipates your team's needs before they are voiced.</p>
@@ -188,15 +200,82 @@ valuable for students, researchers, translators, and language enthusiasts.</p>
       </div>
 
     </section>
-    <footer class="footer">
+    <footer id="contact" class="footer">
+         <div class="footer-content">
           <h5>Contact Us</h5>
+          <div class="footer-info">
+              <div class="info-item">
                   
                   <p>Guru Nanak Dev Engineering College, Gill Park, Ludhiana</p>
+              </div>
+              
+              <div class="info-item">
+                  
                   <p>abc@gmail.com</p>
+              </div>
+              <div class="info-item">
+                  
                   <p>www.website.com</p>
+              </div>
+          </div>
+      </div>
   </footer>
     
   </div>
+ <script>
+    const input = document.getElementById("searchBox");
+    const suggestionsList = document.getElementById("suggestions");
+    const selectedField = document.getElementById("selectedValue");
+    const clearInputBtn = document.getElementById("clearInputBtn");
 
+    input.addEventListener("input", () => {
+      selectedField.value = "false";
+      clearInputBtn.style.display = input.value ? "block" : "none";
+
+      const query = input.value;
+      if (query.length < 1) {
+        suggestionsList.innerHTML = "";
+        return;
+      }
+
+      fetch(`/suggest?q=${encodeURIComponent(query)}`)
+        .then((response) => response.json())
+        .then((data) => {
+          suggestionsList.innerHTML = "";
+          data.forEach((item) => {
+            const li = document.createElement("li");
+            li.textContent = item;
+            li.addEventListener("click", () => {
+              input.value = item;
+              selectedField.value = "true";
+              suggestionsList.innerHTML = "";
+              clearInputBtn.style.display = "block";
+            });
+            suggestionsList.appendChild(li);
+          });
+        });
+    });
+
+    clearInputBtn.addEventListener("click", () => {
+      input.value = "";
+      suggestionsList.innerHTML = "";
+      selectedField.value = "false";
+      clearInputBtn.style.display = "none";
+    });
+
+    function clearSearch() {
+      document.querySelector(".result").innerHTML = "";
+    }
+    // Close suggestion dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    const isClickInsideInput = input.contains(event.target);
+    const isClickInsideSuggestions = suggestionsList.contains(event.target);
+
+    if (!isClickInsideInput && !isClickInsideSuggestions) {
+        suggestionsList.innerHTML = '';
+    }
+});
+
+  </script>
 </body>
 </html>
