@@ -65,17 +65,23 @@
       color:inherit;
     }
     .logo-mark{
-      width:55px;height:50px;border-radius:10px;
+      width:70px;height:70px;border-radius:100px;
       background: linear-gradient(135deg,var(--neon-cyan),var(--neon-magenta));
       box-shadow: 0 6px 18px rgba(189,0,255,0.18), inset 0 -4px 10px rgba(0,0,0,0.35);
       display:flex;align-items:center;justify-content:center;
-      font-family:Orbitron, sans-serif;font-weight:700;color:rgb(234, 240, 235);
+      font-family:Orbitron, sans-serif;font-weight:700;color:rgb(246, 224, 250);
       transform:skewX(-6deg);
     }
+    .logo-mark img {
+  flex: 1;
+  max-width: 60px;
+  max-height: 60px;
+  border-radius: 100px;
+}
     .brand h1{margin:0;font-family:Orbitron, sans-serif;font-weight:700;letter-spacing:1px;}
     nav{display:flex;gap:18px;align-items:center;font-size:14px}
     nav a{color:var(--muted);text-decoration:none;padding:6px 8px;border-radius:6px}
-    nav a:hover{color:white;background:linear-gradient(90deg,rgba(255,255,255,0.03),transparent);}
+    nav a:hover{color:rgb(243, 211, 250);background:linear-gradient(90deg,rgba(255,255,255,0.03),transparent);}
 
     .cta{
       padding:10px 16px;
