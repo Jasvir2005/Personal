@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Transmission</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at top, #1b2a4e, #0b1020);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #cfd8ff;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background: rgba(20, 30, 60, 0.6);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 13px;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            color: #9fb3ff;
+        }
+
+        .field input,
+        .field textarea {
+            width: 100%;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            padding: 12px 14px;
+            color: #e6ebff;
+            outline: none;
+        }
+
+        .field input::placeholder,
+        .field textarea::placeholder {
+            color: #7f8fcf;
+        }
+
+        .field textarea {
+            min-height: 140px;
+            resize: none;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            letter-spacing: 1px;
+            color: #000;
+            background: linear-gradient(90deg, #22ffe3, #ff4fd8);
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container {
+                padding: 18px;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="field">
+            <label>NEURAL ID</label>
+            <input type="text" placeholder="Enter your designation">
+        </div>
+
+        <div class="field">
+            <label>QUANTUM ADDRESS</label>
+            <input type="email" placeholder="you.id@nexusflow.com">
+        </div>
+
+        <div class="field">
+            <label>TRANSMISSION</label>
+            <textarea placeholder="Compose your message to the network..."></textarea>
+        </div>
+
+        <button class="btn">SEND TRANSMISSION</button>
+    </div>
+
+</body>
+</html>

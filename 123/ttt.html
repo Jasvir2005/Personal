@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galaksi UI</title>
+<link rel="stylesheet" href="tt.css">
+</head>
+
+<body>
+  <canvas id="stars"></canvas>
+
+<div class="loader">
+  <div class="planet"></div>
+  <p>Loading Galaxy...</p>
+</div>
+
+<div class="container">
+
+    <div class="search">🔍 Search</div>
+
+    <div class="hero">
+        <h1>TENTANG <span>Galaksi</span></h1>
+        <p>
+            Galaksi adalah kumpulan besar bintang, gas, dan debu
+            yang terikat oleh gravitasi.
+        </p>
+
+        <img class="astronaut"
+        src="https://cdn-icons-png.flaticon.com/512/3212/3212608.png">
+
+        <div class="buttons">
+            <button>LOGIN</button>
+            <button>BUAT AKUN</button>
+        </div>
+    </div>
+
+    <div class="info">
+        Galaksi bisa berbentuk spiral, elips, atau tidak beraturan.
+        Contoh galaksi terkenal adalah Galaksi Bima Sakti.
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            Galaksi biasanya dikelompokkan dalam gugus galaksi.
+            <span>➜ Lanjutin uy..</span>
+        </div>
+
+        <div class="card">
+            Galaksi dapat berinteraksi melalui gaya gravitasi.
+            <span>➜ Sampe sini aja</span>
+        </div>
+    </div>
+
+    <div class="scroll">GULIR ↓</div>
+
+    <div class="gallery">
+        <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa">
+        <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031">
+        <img src="https://images.unsplash.com/photo-1476610182048-b716b8518aae">
+        <img class="big"
+        src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564">
+    </div>
+
+    <button class="toggle" onclick="toggleMode()">
+        Toggle Dark / Light
+    </button>
+    <button class="toggle" onclick="toggleSound()">🔊 Space Sound</button>
+<audio id="spaceSound" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_1cfa3e4c60.mp3">
+</audio>
+ 
+  
+     <div class="ai-bot" onclick="talkAI()">🤖</div>
+     <div class="ai-msg" id="aiMsg">Hi! Main Space Guide hoon 👋</div>
+    <div class="footer">
+        CREATED BY JASVIR KAUR
+    </div>
+    
+</div>
+
+<script>
+function toggleMode(){
+    document.body.classList.toggle("light");
+}
+
+/* Scroll animation */
+const items=document.querySelectorAll(".card,.info,.gallery img");
+
+window.addEventListener("scroll",()=>{
+  items.forEach(el=>{
+    const pos=el.getBoundingClientRect().top;
+    if(pos < window.innerHeight-50){
+      el.style.opacity=1;
+      el.style.transform="translateY(0)";
+    }
+  });
+});
+window.addEventListener("load",()=>{
+  document.querySelector(".loader").style.display="none";
+});
+const astro=document.querySelector(".astronaut");
+
+/* Desktop: follow mouse */
+document.addEventListener("mousemove",(e)=>{
+  const x=(e.clientX/window.innerWidth - 0.5)*20;
+  const y=(e.clientY/window.innerHeight - 0.5)*20;
+  astro.style.transform=`translate(${x}px,${y}px)`;
+});
+
+/* Mobile: tilt effect */
+window.addEventListener("deviceorientation",(e)=>{
+  if(e.gamma){
+    astro.style.transform=`translate(${e.gamma/2}px,${e.beta/6}px)`;
+  }
+});
+const canvas=document.getElementById("stars");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let stars=[];
+for(let i=0;i<120;i++){
+  stars.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*1.5,
+    s:Math.random()*0.5+0.2
+  });
+}
+
+function drawStars(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="white";
+  stars.forEach(star=>{
+    ctx.beginPath();
+    ctx.arc(star.x,star.y,star.r,0,Math.PI*2);
+    ctx.fill();
+    star.y+=star.s;
+    if(star.y>canvas.height) star.y=0;
+  });
+  requestAnimationFrame(drawStars);
+}
+drawStars();
+
+const sound=document.getElementById("spaceSound");
+let playing=false;
+
+function toggleSound(){
+  if(!playing){
+    sound.play();
+  }else{
+    sound.pause();
+  }
+  playing=!playing;
+}
+const reveal=document.querySelectorAll(".card,.info,.gallery img");
+
+window.addEventListener("scroll",()=>{
+  reveal.forEach(el=>{
+    const top=el.getBoundingClientRect().top;
+    if(top < window.innerHeight-60){
+      el.style.opacity=1;
+      el.style.transform="scale(1)";
+    }
+  });
+});
+const messages=[
+ "Galaksi bohot badi hoti hai 🌌",
+ "Bima Sakti ek spiral galaxy hai ✨",
+ "Universe expand ho rahi hai 🚀",
+ "Tap karo aur explore karo 👆"
+];
+
+function talkAI(){
+  const box=document.getElementById("aiMsg");
+  box.style.display="block";
+  box.innerText=messages[Math.floor(Math.random()*messages.length)];
+  setTimeout(()=>box.style.display="none",3000);
+}
+
+// Haptic feedback (mobile)
+document.querySelectorAll("button,.star").forEach(el=>{
+  el.addEventListener("click",()=>{
+    if(navigator.vibrate){
+      navigator.vibrate(30);
+    }
+  });
+});
+
+// Swipe down refresh feel
+let startY=0;
+document.addEventListener("touchstart",e=>{
+  startY=e.touches[0].clientY;
+});
+document.addEventListener("touchend",e=>{
+  if(e.changedTouches[0].clientY-startY > 120){
+    location.reload();
+  }
+});
+
+</script>
+
+
+</body>
+</html>
