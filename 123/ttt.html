@@ -16,6 +16,8 @@
 </div>
 
 <div class="container">
+    <div class="progress-bar" id="progress"></div>
+    <div class="toast" id="toast">Saved Successfully ✔</div>
 
     <div class="search">🔍 Search</div>
 
@@ -30,7 +32,7 @@
         src="https://cdn-icons-png.flaticon.com/512/3212/3212608.png">
 
         <div class="buttons">
-            <button>LOGIN</button>
+            <button onclick="showToast('Login clicked 🚀')">LOGIN</button>
             <button>BUAT AKUN</button>
         </div>
     </div>
@@ -53,6 +55,28 @@
     </div>
 
     <div class="scroll">GULIR ↓</div>
+     <!-- NASA APOD -->
+<div class="nasa reveal">
+  <h3>🌌 NASA Picture of the Day</h3>
+  <div class="nasa-box">
+    <p id="nasaTitle">Loading...</p>
+    <img id="nasaImg" alt="NASA Space Image">
+    <p id="nasaDesc"></p>
+  </div>
+</div>
+<!-- Mars Rover -->
+<div class="mars reveal">
+  <h3>🚗 Mars Rover Photos</h3>
+  <button class="mars-btn" onclick="loadMars()">Load Mars Images</button>
+
+  <div class="mars-gallery" id="marsGallery">
+    Loading Mars photos...
+  </div>
+</div>
+<div class="iss reveal">
+  <h3>🛰️ ISS Live Location</h3>
+  <p id="issData">Loading ISS position...</p>
+</div>
 
     <div class="gallery">
         <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa">
@@ -73,10 +97,11 @@
   
      <div class="ai-bot" onclick="talkAI()">🤖</div>
      <div class="ai-msg" id="aiMsg">Hi! Main Space Guide hoon 👋</div>
+    
     <div class="footer">
         CREATED BY JASVIR KAUR
     </div>
-    
+
 </div>
 
 <script>
@@ -199,9 +224,88 @@ document.addEventListener("touchend",e=>{
     location.reload();
   }
 });
+const cursor=document.getElementById("cursor");
+document.addEventListener("mousemove",e=>{
+  cursor.style.left=e.clientX+"px";
+  cursor.style.top=e.clientY+"px";
+});
+window.addEventListener("scroll",()=>{
+  const h=document.documentElement;
+  const sc=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  document.getElementById("progress").style.width=sc+"%";
+});
+function showToast(msg){
+  const t=document.getElementById("toast");
+  t.textContent=msg;
+  t.style.display="block";
+  setTimeout(()=>t.style.display="none",2000);
+}
+window.addEventListener("offline",()=>{
+  showToast("⚠ No Internet Connection");
+});
+window.addEventListener("online",()=>{
+  showToast("✅ Back Online");
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="d"){
+    toggleMode(); // dark/light
+    showToast("Theme switched 🌙");
+  }
+});
+const apiKey = "DEMO_KEY"; // free NASA key
+
+const nasaBox = document.querySelector(".nasa-box");
+const nasaImg = document.getElementById("nasaImg");
+const nasaTitle = document.getElementById("nasaTitle");
+const nasaDesc = document.getElementById("nasaDesc");
+
+nasaBox.classList.add("loading");
+
+fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`)
+  .then(res => res.json())
+  .then(data => {
+    nasaTitle.textContent = data.title;
+    nasaDesc.textContent = data.explanation;
+    if(data.media_type === "image"){
+      nasaImg.src = data.url;
+    }else{
+      nasaImg.style.display="none";
+    }
+    nasaBox.classList.remove("loading");
+  })
+  .catch(()=>{
+    nasaTitle.textContent="NASA data load nahi ho paya";
+    nasaBox.classList.remove("loading");
+  });
+function loadMars(){
+  const gallery=document.getElementById("marsGallery");
+  gallery.innerHTML="Loading Mars images...";
+
+  fetch("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=DEMO_KEY")
+    .then(res=>res.json())
+    .then(data=>{
+      gallery.innerHTML="";
+      data.photos.slice(0,6).forEach(photo=>{
+        const img=document.createElement("img");
+        img.src=photo.img_src;
+        gallery.appendChild(img);
+      });
+    })
+    .catch(()=>{
+      gallery.innerHTML="Mars photos load nahi ho payi 😢";
+    });
+}
+fetch("https://api.wheretheiss.at/v1/satellites/25544")
+  .then(res=>res.json())
+  .then(data=>{
+    document.getElementById("issData").innerHTML=
+      `🌍 Latitude: ${data.latitude.toFixed(2)}<br>
+       🌎 Longitude: ${data.longitude.toFixed(2)}<br>
+       🚀 Speed: ${data.velocity.toFixed(0)} km/h`;
+  });
 
 </script>
-
+<div class="custom-cursor" id="cursor"></div>
 
 </body>
 </html>
