@@ -107,6 +107,15 @@
         <img class="big"
         src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564">
     </div>
+<div class="info" id="issBox">
+    <h3>🛰️ Live ISS Location</h3>
+    <p id="issData">Loading ISS location...</p>
+</div>
+<div class="info" id="marsBox">
+    <h3>🔴 Mars Rover Photo</h3>
+    <img id="marsImg" style="width:100%;border-radius:15px;">
+    <p style="font-size:12px;">Real photo from Mars rover</p>
+</div>
 
 
     <button class="toggle" onclick="toggleMode()">
@@ -429,6 +438,38 @@ if (currentQ >= quizData.length) {
   document.querySelector(".options").innerHTML =
     `<strong>Your Score: ${score}/${quizData.length}</strong>`;
 }
+function loadISS(){
+    fetch("https://api.wheretheiss.at/v1/satellites/25544")
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("issData").innerHTML =
+        `Latitude: ${data.latitude.toFixed(2)}<br>
+         Longitude: ${data.longitude.toFixed(2)}`;
+    });
+}
+loadISS();
+setInterval(loadISS, 5000);
+if("Notification" in window){
+    Notification.requestPermission().then(p => {
+        if(p === "granted"){
+            new Notification("🚀 Space Update",{
+                body:"Today's NASA space image is ready!",
+            });
+        }
+    });
+  }
+const nasaKey = "DEMO_KEY";
+
+fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=${nasaKey}`)
+.then(res => res.json())
+.then(data => {
+    document.getElementById("marsImg").src =
+    data.photos[0].img_src;
+})
+.catch(()=>{
+    document.getElementById("marsBox").innerHTML =
+    "Mars data load nahi ho paya 😕";
+});
 
 </script>
 <div class="custom-cursor" id="cursor"></div>
