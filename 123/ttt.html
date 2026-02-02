@@ -64,20 +64,42 @@
     <p id="nasaDesc"></p>
   </div>
 </div>
-<!-- Mars Rover -->
-<div class="mars reveal">
-  <h3>🚗 Mars Rover Photos</h3>
-  <button class="mars-btn" onclick="loadMars()">Load Mars Images</button>
 
-  <div class="mars-gallery" id="marsGallery">
-    Loading Mars photos...
-  </div>
-</div>
 <div class="iss reveal">
   <h3>🛰️ ISS Live Location</h3>
   <p id="issData">Loading ISS position...</p>
 </div>
+<div class="nasa-date reveal">
+  <h3>📅 NASA Image by Date</h3>
+  <input type="date" id="nasaDate">
+  <button onclick="loadByDate()">Load Image</button>
+  <img id="dateImg">
+</div>
+<div class="earth reveal">
+  <h3>🌍 Earth from Space</h3>
+  <img id="earthImg">
+</div>
+<div class="nasa-gallery reveal">
+  <h3>🌌 NASA Space Gallery</h3>
+  <div id="autoGallery" class="auto-gallery"></div>
+</div>
+<!-- NASA QUIZ -->
+<div class="quiz reveal">
+  <h3>🧠 NASA Space Quiz</h3>
 
+  <div id="question">Loading question...</div>
+
+  <div class="options">
+    <button onclick="checkAnswer(0)"></button>
+    <button onclick="checkAnswer(1)"></button>
+    <button onclick="checkAnswer(2)"></button>
+    <button onclick="checkAnswer(3)"></button>
+  </div>
+
+  <p id="score">Score: 0</p>
+  <p id="highScore">High Score: 0</p>
+
+</div>
     <div class="gallery">
         <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa">
         <img src="https://images.unsplash.com/photo-1454789548928-9efd52dc4031">
@@ -85,6 +107,7 @@
         <img class="big"
         src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564">
     </div>
+
 
     <button class="toggle" onclick="toggleMode()">
         Toggle Dark / Light
@@ -277,24 +300,7 @@ fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`)
     nasaTitle.textContent="NASA data load nahi ho paya";
     nasaBox.classList.remove("loading");
   });
-function loadMars(){
-  const gallery=document.getElementById("marsGallery");
-  gallery.innerHTML="Loading Mars images...";
 
-  fetch("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=DEMO_KEY")
-    .then(res=>res.json())
-    .then(data=>{
-      gallery.innerHTML="";
-      data.photos.slice(0,6).forEach(photo=>{
-        const img=document.createElement("img");
-        img.src=photo.img_src;
-        gallery.appendChild(img);
-      });
-    })
-    .catch(()=>{
-      gallery.innerHTML="Mars photos load nahi ho payi 😢";
-    });
-}
 fetch("https://api.wheretheiss.at/v1/satellites/25544")
   .then(res=>res.json())
   .then(data=>{
@@ -303,6 +309,126 @@ fetch("https://api.wheretheiss.at/v1/satellites/25544")
        🌎 Longitude: ${data.longitude.toFixed(2)}<br>
        🚀 Speed: ${data.velocity.toFixed(0)} km/h`;
   });
+function loadByDate(){
+  const d=document.getElementById("nasaDate").value;
+  fetch(`https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=${d}`)
+    .then(res=>res.json())
+    .then(data=>{
+      document.getElementById("dateImg").src=data.url;
+    });
+}
+fetch("https://api.nasa.gov/EPIC/api/natural/images?api_key=DEMO_KEY")
+  .then(res=>res.json())
+  .then(data=>{
+    const img=data[0];
+    const d=img.date.split(" ")[0].replaceAll("-","/");
+    document.getElementById("earthImg").src=
+      `https://epic.gsfc.nasa.gov/archive/natural/${d}/png/${img.image}.png`;
+  });
+fetch("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count=4")
+  .then(res=>res.json())
+  .then(data=>{
+    const g=document.getElementById("autoGallery");
+    data.forEach(item=>{
+      if(item.media_type==="image"){
+        const img=document.createElement("img");
+        img.src=item.url;
+        g.appendChild(img);
+      }
+    });
+  });
+  let highScore = localStorage.getItem("nasaHighScore") || 0;
+document.getElementById("highScore").textContent =
+  "High Score: " + highScore;
+
+const quizData = [
+  {
+    q: "NASA ka full form kya hai?",
+    options: [
+      "National Aeronautics and Space Administration",
+      "North American Space Agency",
+      "National Air Space Authority",
+      "New Aero Space Agency"
+    ],
+    ans: 0
+  },
+  {
+    q: "Mars ko kaunsa planet kaha jata hai?",
+    options: ["Blue Planet", "Gas Giant", "Red Planet", "Ice Planet"],
+    ans: 2
+  },
+  {
+    q: "First human on the Moon kaun tha?",
+    options: ["Buzz Aldrin", "Neil Armstrong", "Yuri Gagarin", "John Glenn"],
+    ans: 1
+  },
+  {
+    q: "ISS ka matlab kya hai?",
+    options: [
+      "International Space Station",
+      "Indian Space Satellite",
+      "Inter Solar System",
+      "International Science System"
+    ],
+    ans: 0
+  }
+];
+
+let currentQ = 0;
+let score = 0;
+
+const questionEl = document.getElementById("question");
+const optionBtns = document.querySelectorAll(".options button");
+const scoreEl = document.getElementById("score");
+
+function loadQuestion(){
+  const q = quizData[currentQ];
+  questionEl.textContent = q.q;
+  optionBtns.forEach((btn,i)=>{
+    btn.textContent = q.options[i];
+  });
+}
+
+function checkAnswer(i){
+  if(i === quizData[currentQ].ans){
+    score++;
+    showToast && showToast("Correct! ✅");
+  }else{
+    showToast && showToast("Wrong ❌");
+  }
+
+  currentQ++;
+
+  if(currentQ < quizData.length){
+    loadQuestion();
+  }else{
+    questionEl.textContent = "🎉 Quiz Completed!";
+    document.querySelector(".options").innerHTML =
+      `<strong>Your Score: ${score}/${quizData.length}</strong>`;
+  }
+
+  scoreEl.textContent = "Score: " + score;
+}
+
+loadQuestion();
+if (currentQ >= quizData.length) {
+
+  if (score > highScore) {
+    highScore = score;
+    localStorage.setItem("nasaHighScore", highScore);
+
+    document.getElementById("highScore").textContent =
+      "🏆 High Score: " + highScore;
+
+    if (typeof showToast === "function") {
+      showToast("🎉 New High Score!");
+    }
+  }
+
+  questionEl.textContent = "🎉 Quiz Completed!";
+  document.querySelector(".options").innerHTML =
+    `<strong>Your Score: ${score}/${quizData.length}</strong>`;
+}
 
 </script>
 <div class="custom-cursor" id="cursor"></div>
