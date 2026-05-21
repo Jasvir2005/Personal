@@ -1,0 +1,304 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:#c9b3ff;
+  font-family:sans-serif;
+}
+
+.main-chat-container{
+  width:95%;
+  height:95vh;
+  margin:20px auto;
+  background:white;
+  border-radius:25px;
+  display:flex;
+  overflow:hidden;
+}
+
+/* LEFT */
+
+.left-sidebar{
+  width:25%;
+  background:#111827;
+  color:white;
+  padding:20px;
+}
+
+.logo-box{
+  font-size:28px;
+  font-weight:bold;
+  margin-bottom:30px;
+}
+
+.single-user{
+  padding:15px;
+  border-radius:15px;
+  cursor:pointer;
+  margin-bottom:10px;
+  transition:.3s;
+}
+
+.single-user:hover{
+  background:#5d248f;
+}
+
+.active-user{
+  background:white;
+  color:black;
+}
+
+.user-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+/* CHAT */
+
+.chat-section{
+  width:50%;
+  background:#f7f7f7;
+  display:flex;
+  flex-direction:column;
+}
+
+.chat-top{
+  padding:20px;
+  background:white;
+  border-bottom:1px solid #ddd;
+}
+
+.chat-user{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.chat-messages{
+  flex:1;
+  padding:20px;
+  overflow-y:auto;
+}
+
+.chat-bubble{
+  max-width:70%;
+  padding:15px;
+  border-radius:20px;
+  margin-bottom:15px;
+}
+
+.my-msg{
+  margin-left:auto;
+  background:#6a1b9a;
+  color:white;
+}
+
+.other-msg{
+  background:white;
+}
+
+.chat-image{
+  width:220px;
+  border-radius:15px;
+  margin-top:10px;
+}
+
+.chat-input-area{
+  padding:15px;
+  background:white;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  position:relative;
+}
+
+.chat-input-area input{
+  flex:1;
+  padding:14px;
+  border:none;
+  outline:none;
+  background:#f1f1f1;
+  border-radius:30px;
+}
+
+.icon-btn{
+  border:none;
+  background:#eee;
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+.send-btn{
+  border:none;
+  background:#6a1b9a;
+  color:white;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  cursor:pointer;
+  font-size:18px;
+}
+
+.emoji-picker{
+  position:absolute;
+  bottom:80px;
+  left:10px;
+}
+
+.typing-box{
+  padding-left:20px;
+  padding-bottom:10px;
+  color:gray;
+}
+
+/* PROFILE */
+
+.right-profile{
+  width:25%;
+  background:#fafafa;
+  padding:20px;
+}
+
+.profile-card{
+  text-align:center;
+  margin-top:30px;
+}
+
+.big-avatar{
+  width:130px;
+  height:130px;
+  margin:auto;
+  border-radius:50%;
+  overflow:hidden;
+  background:#6a1b9a;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:40px;
+}
+
+.big-profile-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.avatar{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  overflow:hidden;
+  background:#6a1b9a;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+}
+
+.profile-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.delete-chat-btn{
+  background:#ff3b3b;
+  color:white;
+  border:none;
+  padding:10px 18px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.delete-chat-btn:hover{
+  opacity:0.9;
+}
+
+.contacts-container {
+  padding: 20px;
+  color: white;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  margin: 15px 0;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #1b1b1b;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.contact-card:hover {
+  background: #2a2a2a;
+}
+
+.contact-info {
+  flex: 1;
+}
+
+.contact-info h4 {
+  margin: 0;
+}
+
+.contact-info p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: gray;
+}
+
+.status-box {
+  display: flex;
+  align-items: center;
+}
+
+.online-dot,
+.offline-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.online-dot {
+  background: limegreen;
+}
+
+.offline-dot {
+  background: gray;
+}
+
+.no-users {
+  text-align: center;
+  margin-top: 20px;
+  color: gray;
+}
+
+.online {
+  color: green;
+  font-size: 13px;
+}
+
+.offline {
+  color: gray;
+  font-size: 13px;
+}
